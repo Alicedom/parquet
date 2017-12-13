@@ -104,7 +104,7 @@ public class TestTimesheets {
 	}
 	public static void main(String[] args) {
 		int period_id = 89;
-		int employee_id = 5170;
+//		int employee_id = 5170;
 		long start,stop;
 		
 		start = System.currentTimeMillis();
