@@ -6,6 +6,14 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 
+/*
+ * Tinh income config max. 
+ * 
+ * Chua tinh duoc qua s'ang (-> Trung binh cong)
+ * Can thiet ke s'ang = Income * Tong ngay di lam co Income ID/ Tong so ngay di lam
+ * 
+ * Ngay di lam = Period - Public holiday - TA working calendar - (T7, CN: Nghi co dinh)
+ */
 public class IncomeConfigs {
 	public IncomeConfigs() {
 		Conf.loadTable("PERIODS");

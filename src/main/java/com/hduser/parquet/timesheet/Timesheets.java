@@ -12,7 +12,7 @@ public class Timesheets {
 		Conf.loadTable("TA_WORKING_TYPES");
 	}
 
-	public String sql_timesheet(int period){
+	public static String sql_timesheet(int period){
 		String sql_timesheet=
 				"select\n" + 
 						"	IS_NIGHT_SHIFT,\n" + 
@@ -56,7 +56,9 @@ public class Timesheets {
 	}
 
 	public Dataset<Row> getTimesheet(int period){
-		return Conf.spark.sql(sql_timesheet(period));
+		Dataset<Row> timesheet= Conf.spark.sql(sql_timesheet(period));
+//		timesheet.write().mode(SaveMode.Overwrite).partitionBy("EMPLOYEE_ID").parquet(Conf.hdfsURL+"timesheet/PERIOD_ID="+period);
+		return timesheet;
 	}
 
 	public static void main(String[] args) {

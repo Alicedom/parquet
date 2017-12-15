@@ -1,9 +1,23 @@
 package com.hduser.parquet.convert.data;
 
 import org.apache.spark.sql.AnalysisException;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
+
+import com.hduser.parquet.timesheet.Conf;
 
 public class ConvertParquet {
-	public ConvertParquet() throws AnalysisException {
+	public ConvertParquet() {
+
+		try {
+			importAll();
+		} catch (AnalysisException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void importAll() throws AnalysisException {
 		
 		ImportConf conf = new ImportConf();
 		
@@ -30,17 +44,44 @@ public class ConvertParquet {
 		//Tax
 		conf.importTable("TAXES");
 		conf.importTable("INCOME_CONFIGS","INCOME_CONFIG_ID","EMPLOYEE_ID","INCOME_ID","CUSTOM_VALUE","START_DATE","END_DATE");
-				
 		
+	}
+	String sql_working_date = 
+			"select \n" + 
+			"	PERIOD_ID,\n" + 
+			"	START_DATE,\n" + 
+			"	END_DATE,\n" + 
+			"	stage_1 + stage_2 - stage_3 as WORKING_DATE\n" + 
+			"\n" + 
+			"from\n" + 
+			"(	select\n" + 
+			"		*,\n" + 
+			"		case when datediff(mo1,START_DATE) -2 > 0 then datediff(mo1,START_DATE) -2 else 0 end as stage_1, \n" + 
+			"		datediff(mo2,mo1) /7 * 5 as stage_2,\n" + 
+			"		case when datediff(mo2,END_DATE) -3 > 0 then datediff(mo2,END_DATE) -3 else 0 end  as stage_3 \n" + 
+			"	from	 \n" + 
+			"		(\n" + 
+			"		select\n" + 
+			"			PERIOD_ID,\n" + 
+			"			START_DATE,\n" + 
+			"			END_DATE,\n" + 
+			"			next_day(START_DATE,'MO') as mo1,\n" + 
+			"			next_day(END_DATE,'MO') as mo2,\n" + 
+			"			weekofyear(START_DATE) as w1,\n" + 
+			"			weekofyear(END_DATE) as w2\n" + 
+			"\n" + 
+			"		from\n" + 
+			"			PERIODS\n" + 
+			"		) t\n" + 
+			") k";
+	public void getTA_Working_Date() {
+		Dataset<Row> workingDate = Conf.spark.sql(sql_working_date);
+		workingDate.repartition().write().mode(SaveMode.Overwrite).json(Conf.hdfsURL+"TA_WORKING_CALENDAR");
 	}
 	
 	public static void main(String[] args) {
-		try {
-			new ConvertParquet();
-		} catch (AnalysisException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Conf.loadTable("PERIODS");
+		new ConvertParquet().getTA_Working_Date();
 	}
 
 }
