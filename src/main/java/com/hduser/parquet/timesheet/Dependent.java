@@ -16,8 +16,8 @@ public class Dependent {
 		return 
 				"select \n" + 
 				"	EMPLOYEE_ID,\n" + 
-				"	count(t.EMPLOYEE_DEPENDANT_ID) as NUMBER_DEPENDENT,\n" + 
-				"	count(t.EMPLOYEE_DEPENDANT_ID) * 9 * 1000000 as SALARY_DEPENDENT,\n" + 
+				"	count(t.EMPLOYEE_DEPENDANT_ID) as DEPENDENT_NUMBER,\n" + 
+				"	count(t.EMPLOYEE_DEPENDANT_ID) * 3.6 * 1000000 as DEPENDENT_SALARY,\n" + 
 				"	PERIOD_ID\n" + 
 				" from\n" + 
 				"	(\n" + 
@@ -38,7 +38,7 @@ public class Dependent {
 	
 	public Dataset<Row> getDependent(int period){
 		Dataset<Row> dependent = Conf.spark.sql(sql_dependent(period));
-		
+		dependent.repartition(1).write().mode(SaveMode.Overwrite).json(Conf.hdfsURL+"dependent/PERIOD_ID="+period);
 		return dependent;
 	}
 	

@@ -20,7 +20,8 @@ public class OverTimes {
 				"		PERIOD_ID,\n" + 
 				"		OVERTIME_NAME,\n" + 
 				"		sum(APPROVED_HOURS) as SUM_HOURS,\n" + 
-				"		sum(APPROVED_HOURS) * cast(SUBSTRING(OVERTIME_NAME,4,3) as int) / 100 as CO_OVER\n" + 
+				"		sum(APPROVED_HOURS) * cast(SUBSTRING(OVERTIME_NAME,4,3) as int) / 100 as CO_OVERTIME,\n" +
+				"		sum(APPROVED_HOURS) * (cast(SUBSTRING(OVERTIME_NAME,4,3) as int) - 100) / 100 as CO_OVERTIME_NO_TAX\n" +
 				" from	\n" + 
 				"	(select\n" + 
 				"		EMPLOYEE_ID,\n" + 
@@ -64,9 +65,11 @@ public class OverTimes {
 				"";
 	}
 	
+	
+	
 	public Dataset<Row> getOvertime(int period){
 		Dataset<Row> overtime = Conf.spark.sql(sql_overtime(period));
-//		overtime.write().mode(SaveMode.Overwrite).json(Conf.hdfsURL+"overtime/PERIOD_ID="+period);
+		overtime.write().mode(SaveMode.Overwrite).json(Conf.hdfsURL+"overtime/PERIOD_ID="+period);
 		return overtime;
 	}
 	

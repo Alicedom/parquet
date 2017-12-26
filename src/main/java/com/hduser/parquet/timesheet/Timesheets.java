@@ -19,7 +19,7 @@ public class Timesheets {
 						"	EMPLOYEE_ID,\n" + 
 						"	COEFFICIENT,\n" + 
 						"	NUMBER_DATE,\n" + 
-						"	COEFFICIENT * NUMBER_DATE as BASIC_CO,\n" + 
+						"	COEFFICIENT * NUMBER_DATE as CO_TIMESHEET,\n" + 
 						"	WORKING_TYPE_ID,\n" + 
 						"	WORKING_TYPE_NAME,\n" + 
 						"	PERIOD_ID" +
@@ -57,7 +57,7 @@ public class Timesheets {
 
 	public Dataset<Row> getTimesheet(int period){
 		Dataset<Row> timesheet= Conf.spark.sql(sql_timesheet(period));
-//		timesheet.write().mode(SaveMode.Overwrite).partitionBy("EMPLOYEE_ID").parquet(Conf.hdfsURL+"timesheet/PERIOD_ID="+period);
+		timesheet.write().mode(SaveMode.Overwrite).partitionBy("EMPLOYEE_ID").parquet(Conf.hdfsURL+"timesheet/PERIOD_ID="+period);
 		return timesheet;
 	}
 

@@ -1,0 +1,21 @@
+(<p>We,21)
+(org.apache.hadoop.security.authentication.util">AuthToken</a>,3)
+(href="../../../../../../org/apache/hadoop/yarn/server/sharedcachemanager/ClientProtocolService.html#use(org.apache.hadoop.yarn.api.protocolrecords.UseSharedCacheResourceRequest)">use</a></strong>(org.apache.hadoop.yarn.api.protocolrecords.UseSharedCacheResourceRequest&nbsp;request)</code>&nbsp;</td>,1)
+(org.apache.hadoop.mapreduce.jobhistory">JhCounterGroup</a>&gt;&nbsp;groups)</code>,2)
+(org.apache.hadoop.ha.proto</h1>,3)
+(href="../../api/org/apache/hadoop/fs/FileContext.html">FileContext</a>,1)
+(href="../../../../../../../../org/apache/hadoop/yarn/server/federation/store/records/SubClusterDeregisterRequest.html",18)
+(href="./org/apache/hadoop/mapred/proto/ShuffleHandlerRecoveryProtos.JobShuffleInfoProto.Builder.html#setJobToken(org.apache.hadoop.security.proto.SecurityProtos.TokenProto.Builder)">setJobToken(SecurityProtos.TokenProto.Builder)</a></span>,1)
+(href="./org/apache/hadoop/yarn/api/records/Container.html#getVersion()">getVersion()</a></span>,1)
+(class="strong">CompressorStream</span>,3)
+(href="../../../../../org/apache/hadoop/record/package-summary.html">Next,4)
+(ApplicationId.</dd>,6)
+(target="classFrame">AMRMTokenSecretManager</a></li>,2)
+(href="org/apache/hadoop/yarn/webapp/MimeType.html#JSON">JSON</a></code></td>,1)
+(href="../../../../../../../../../../org/apache/hadoop/yarn/server/federation/store/records/impl/pb/SetSubClusterPolicyConfigurationResponsePBImpl.html#getProto()">getProto</a></strong>()</code>&nbsp;</td>,1)
+(href="../../../../../../org/apache/hadoop/ipc/WritableRpcEngine.Server.html#WritableRpcEngine.Server(java.lang.Class,%20java.lang.Object,%20org.apache.hadoop.conf.Configuration,%20java.lang.String,%20int,%20int,%20int,%20int,%20boolean,%20org.apache.hadoop.security.token.SecretManager,%20java.lang.String)">WritableRpcEngine.Server</a></strong>(<a,4)
+(<li>org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.ResourceOverCommitException</li>,1)
+(href="./org/apache/hadoop/yarn/server/resourcemanager/scheduler/fair/QueuePlacementPolicy.html#fromXml(org.w3c.dom.Element,%20java.util.Map,%20org.apache.hadoop.conf.Configuration)">fromXml(Element,,1)
+(href="../../../../../../../../org/apache/hadoop/yarn/server/resourcemanager/scheduler/SchedulerApplicationAttempt.html#getSchedulingOpportunities(org.apache.hadoop.yarn.server.scheduler.SchedulerRequestKey)">getSchedulingOpportunities</a>,,2)
+(href="../../../../../../constant-values.html#org.apache.hadoop.mapreduce.v2.proto.MRProtos.JobReportProto.REDUCE_PROGRESS_FIELD_NUMBER">Constant,1)
+(��M*�<��n�<�J�LZ�U:r�I��)�ŷ���P����=~���K_���N:�7Lt	�mTb��-+��SGQ��]�Q����q�]�w,1)

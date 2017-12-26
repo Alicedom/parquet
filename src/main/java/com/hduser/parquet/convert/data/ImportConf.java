@@ -40,14 +40,14 @@ public class ImportConf {
 	}
 
 	public void importTable(String table) {
-			Dataset<Row> periods = loadTableJDBC(table);
-			periods.write().parquet(hdfsURL+table);
+			Dataset<Row> dataset = loadTableJDBC(table);
+			dataset.repartition(4).write().parquet(hdfsURL+table);
 	}
 
 
 	public void importTable(String talbe,String col, String... cols ) throws AnalysisException{
-		Dataset<Row> periods = loadTableJDBC(talbe).select(col,cols);
-		periods.write().parquet(hdfsURL+talbe);
+		Dataset<Row> dataset = loadTableJDBC(talbe).select(col,cols);
+		dataset.repartition(4).write().parquet(hdfsURL+talbe);
 		
 	}
 

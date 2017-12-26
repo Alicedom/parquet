@@ -1,0 +1,27 @@
+(href="./org/apache/hadoop/yarn/webapp/hamlet/Hamlet.BUTTON.html#map(java.lang.String)">map(String)</a></span>,1)
+(href="class-use/AllocateRequest.AllocateRequestBuilder.html">Use</a></li>,4)
+(name="getBlockPoolIdBytes()">,12)
+(href="../../../../org/apache/hadoop/mapreduce/MRJobConfig.html#REDUCE_MARKRESET_BUFFER_PERCENT">REDUCE_MARKRESET_BUFFER_PERCENT</a></strong></code>&nbsp;</td>,1)
+(href="./org/apache/hadoop/yarn/server/nodemanager/containermanager/container/ContainerExitEvent.html#ContainerExitEvent(org.apache.hadoop.yarn.api.records.ContainerId,%20org.apache.hadoop.yarn.server.nodemanager.containermanager.container.ContainerEventType,%20int,%20java.lang.String)">ContainerExitEvent(ContainerId,,1)
+(remote,413)
+(a�R�.�E�.q�p���s��p��,1)
+(parent.document.title="PreemptionManager,1)
+(R�~��ʰJ�m��,1)
+(org.apache.hadoop.mapreduce.v2.proto">MRServiceProtos.GetTaskReportsRequestProto</a>&gt;</code></td>,4)
+(w�,1)
+(L���u��}������ߏo��������t�����?#+'3�'&.&��L,���1�8�,78)
+(href="../../../../../../../org/apache/hadoop/hdfs/server/namenode/metrics/NameNodeMetrics.html#shutdown()">shutdown</a></strong>()</code>&nbsp;</td>,2)
+(org.apache.hadoop.yarn.server.timeline.security.<a,35)
+(��}��W�9�2mڴ�#��ի���"rL���'o�E�,1)
+(name="getFileDescriptor()">,3)
+(java.math.BigDecimal)">,2)
+(href="https://issues.apache.org/jira/browse/HDFS-12089">HDFS-12089</a>,1)
+(href="../../../../../../org/apache/hadoop/io/file/tfile/SimpleBufferedOutputStream.html#write(byte[],%20int,%20int)">write</a></strong>(byte[]&nbsp;b,,2)
+(<p><tt>blockpool</tt>,1)
+(href="../../../../../../../org/apache/hadoop/mapreduce/v2/proto/MRProtos.TaskReportProto.Builder.html#getRunningAttemptsOrBuilder(int)">getRunningAttemptsOrBuilder</a></strong>(int&nbsp;index)</code>,1)
+(href="../../../../../org/apache/hadoop/mapreduce/jobhistory/ReduceAttemptFinished.html#SCHEMA$">SCHEMA$</a></strong></code>&nbsp;</td>,1)
+(href="../../../../../org/apache/hadoop/tracing/TraceAdminPB.SpanReceiverListInfo.html#newBuilderForType()">newBuilderForType</a></strong>()</code>&nbsp;</td>,2)
+(href="../../../../../../../../org/apache/hadoop/yarn/api/impl/pb/service/ApplicationClientProtocolPBServiceImpl.html#getApplicationReport(com.google.protobuf.RpcController,%20org.apache.hadoop.yarn.proto.YarnServiceProtos.GetApplicationReportRequestProto)">getApplicationReport</a></strong>(com.google.protobuf.RpcController&nbsp;arg0,,1)
+(href="../../../../../../org/apache/hadoop/fs/http/client/HttpFSFileSystem.html#CONTENT_SUMMARY_JSON">CONTENT_SUMMARY_JSON</a></strong></code>&nbsp;</td>,1)
+(�1�>`��FZN��e}�v,t���I�))R9��D`D"0�S�GK�!���3x�|,X~?D;d�@HhL*+�$����R<��X:o2S,1)
+(href="https://issues.apache.org/jira/browse/HADOOP-6847">HADOOP-6847</a>,1)

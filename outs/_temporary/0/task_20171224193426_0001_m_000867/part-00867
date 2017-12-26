@@ -1,0 +1,21 @@
+(<pre>protected&nbsp;void&nbsp;addInputPathRecursively(<a,4)
+(class="strong">TimelineContext</span></a>,4)
+(<h4>FAIL_TASK</h4>,1)
+(static&nbsp;boolean&nbsp;setExecutable(<a,3)
+(href="org/apache/hadoop/mapreduce/MRConfig.html#STATIC_RESOLUTIONS">STATIC_RESOLUTIONS</a></code></td>,1)
+(Z���]���߂(tC�?����B3�?Q�wI���~�,��?���,1)
+(href="../../../../../../../org/apache/hadoop/yarn/webapp/hamlet/Hamlet.A.html#map(java.lang.String)">map</a></strong>(<a,2)
+(<li>org.apache.hadoop.security.authorize.DefaultImpersonationProvider</li>,3)
+(href="../../../../../../org/apache/hadoop/yarn/webapp/WebApps.Builder.html#withXFSProtection(java.lang.String)">withXFSProtection</a></strong>(<a,1)
+(href="../../../../../../org/apache/hadoop/yarn/server/webapp/WebServices.html#getApplicationReport(org.apache.hadoop.yarn.api.protocolrecords.GetApplicationReportRequest)">getApplicationReport</a></strong>(org.apache.hadoop.yarn.api.protocolrecords.GetApplicationReportRequest&nbsp;request)</code>&nbsp;</td>,1)
+(href="../../../../../../../../org/apache/hadoop/mapreduce/v2/app/rm/ContainerAllocatorEvent.html#ContainerAllocatorEvent(org.apache.hadoop.mapreduce.v2.api.records.TaskAttemptId,%20org.apache.hadoop.mapreduce.v2.app.rm.ContainerAllocator.EventType)">ContainerAllocatorEvent</a></strong>(org.apache.hadoop.mapreduce.v2.api.records.TaskAttemptId&nbsp;attemptID,,1)
+(name="Project_Dependencies"></a></h2><a,2)
+(kӦM�}�ƍ���������㝌@^HMN�/��#>���P�ꞈЗ���p��(W�tp��6^�c}�o�k�P7�Qn�r���8���_,1)
+(class="colLast"><code>"hadoop.security.instrumentation.requires.admin"</code></td>,3)
+(org.apache.hadoop.yarn.server.timelineservice.storage.apptoflow">AppToFlowTable</a></strong></code>,1)
+(java.lang">String</a>&nbsp;executePrivilegedOperation(<a,2)
+(org.apache.hadoop.yarn.server.federation.store.records.UpdateApplicationHomeSubClusterRequest,2)
+(<h4>getAvgShuffleTime</h4>,2)
+(align="left">Manual,2)
+(name="Records()">,1)
+(org.apache.hadoop.mapreduce.v2.proto">MRServiceProtos.KillJobRequestProto</a>&nbsp;parseFrom(com.google.protobuf.CodedInputStream&nbsp;input,,1)

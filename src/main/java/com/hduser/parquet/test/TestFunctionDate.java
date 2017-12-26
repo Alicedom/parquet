@@ -1,8 +1,6 @@
 package com.hduser.parquet.test;
 
 import com.hduser.parquet.timesheet.Conf;
-import org.apache.spark.sql.functions;
-import org.apache.spark.sql.catalyst.expressions.DateDiff;
 public class TestFunctionDate {
 	public TestFunctionDate() {
 

@@ -10,8 +10,7 @@ public class Conf {
 	public static final int BASIC_SALARY_ID = 46; 
 
 	public static String hdfsURL = new com.hduser.parquet.convert.data.ImportConf().hdfsURL;
-	public static String outURL = "/home/hduser/Documents/script/SQL/out/";
-
+	public static String outURL = "/home/hduser/Documents/script/SQL/out2/";
 
 
 	public static SparkSession spark = SparkSession
@@ -23,7 +22,7 @@ public class Conf {
 
 	public static void loadTable(String table) {
 
-		Dataset<Row> parquetFileDF = Conf.spark.read().parquet(Conf.hdfsURL+table);
+		Dataset<Row> parquetFileDF = Conf.spark.read().parquet(Conf.hdfsURL+table).repartition(8);
 		parquetFileDF.createOrReplaceTempView(table);
 	}
 

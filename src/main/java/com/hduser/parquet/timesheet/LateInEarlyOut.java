@@ -6,8 +6,6 @@ import org.apache.spark.sql.SaveMode;
 
 public class LateInEarlyOut {
 
-	private final String HDFS = Conf.hdfsURL; 
-	
 	public LateInEarlyOut() {
 		Conf.loadTable("PERIODS");
 		Conf.loadTable("TA_EMPLOYEE_TIMESHEETS");
