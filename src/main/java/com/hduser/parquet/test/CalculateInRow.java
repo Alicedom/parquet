@@ -5,7 +5,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
 
-import com.hduser.parquet.timesheet.Timesheets;
+import com.hduser.parquet.dataset.Timesheets;
 
 import scala.Tuple2;
 

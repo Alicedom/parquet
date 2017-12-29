@@ -1,16 +1,16 @@
 package com.hduser.parquet.convert.data;
 
 import org.apache.spark.sql.AnalysisException;
-
-import com.hduser.parquet.timesheet.Conf;
-
+/*
+ * Import data from RDBMS to HDFS
+ * Config connection string to RDBMS and HDFS in ImportConf class
+ */
 public class ConvertParquet {
 	public ConvertParquet() {
 
 		try {
 			importAll();
 		} catch (AnalysisException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -32,7 +32,7 @@ public class ConvertParquet {
 //		conf.importTable("APPROVAL_TRIPCOSTS","EMPLOYEE_ID","DATE","IS_HALF_DAY","ALLOWANCE_ID","TOTAL","IS_APPROVAL","TRIP_REQUEST_ID");
 //		conf.importTable("TRIP_COST_LOCATION");
 		//Leave
-		conf.importTable("LEAVE_REQUESTS","LEAVE_REQUEST_ID","LEAVE_TYPE_ID","EMPLOYEE_ID","START_DATE","END_DATE","NO_OF_WORKING_DAYS","NO_OF_CALENDAR_DAYS","LEAVE_REQUEST_STATUS_ID","COUNT_APPROVE");
+//		conf.importTable("LEAVE_REQUESTS","LEAVE_REQUEST_ID","LEAVE_TYPE_ID","EMPLOYEE_ID","START_DATE","END_DATE","NO_OF_WORKING_DAYS","NO_OF_CALENDAR_DAYS","LEAVE_REQUEST_STATUS_ID","COUNT_APPROVE");
 			
 		//Dependent
 		conf.importTable("EMPLOYEES","EMPLOYEE_ID","PROBATION_END_DATE");
@@ -45,8 +45,10 @@ public class ConvertParquet {
 	}
 
 	public static void main(String[] args) {
-		Conf.loadTable("PERIODS");
-//		new ConvertParquet().getTA_Working_Date();
+		long start = System.currentTimeMillis();
+		new ConvertParquet();
+		long stop = System.currentTimeMillis();
+		System.out.println(stop-start);
 	}
 
 }

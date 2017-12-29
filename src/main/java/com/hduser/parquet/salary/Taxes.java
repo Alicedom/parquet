@@ -4,7 +4,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 
-import com.hduser.parquet.timesheet.Conf;
+import com.hduser.parquet.dataset.Conf;
 
 public class Taxes {
 

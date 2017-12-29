@@ -1,6 +1,6 @@
 package com.hduser.parquet.test;
 
-import com.hduser.parquet.timesheet.Conf;
+import com.hduser.parquet.dataset.Conf;
 public class TestFunctionDate {
 	public TestFunctionDate() {
 

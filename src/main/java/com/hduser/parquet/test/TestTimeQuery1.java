@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-import com.hduser.parquet.timesheet.OverTimes;
-import com.hduser.parquet.timesheet.Timesheets;
+import com.hduser.parquet.dataset.OverTimes;
+import com.hduser.parquet.dataset.Timesheets;
 
 public class TestTimeQuery1 {
 
@@ -20,7 +20,7 @@ public class TestTimeQuery1 {
 					"sa",
 					"Khanhno1");
 			Statement stmt = con.createStatement();
-			stmt.executeQuery(Timesheets.sql_timesheet(period));
+			stmt.executeQuery(new Timesheets().sql_timesheet(period));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

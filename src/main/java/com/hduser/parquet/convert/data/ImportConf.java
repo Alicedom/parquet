@@ -3,28 +3,21 @@ package com.hduser.parquet.convert.data;
 import org.apache.spark.sql.AnalysisException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
 public class ImportConf {
-	public String hdfsURL="hdfs://localhost:54310/user/hduser/parquet/";
+	/*
+	 * link to hdfs
+	 * hdfs://<master ip>:<master port>/path/to/database
+	 */
+	public String hdfsURL="hdfs://master:54310/user/hduser/parquet2/";
 
+	/*
+	 * Connection String to connect sql server 
+	 */
 	public String sqlURL="jdbc:sqlserver://localhost;databaseName=eHRM_Hamaden;user=sa;password=Khanhno1;";
-	public String getHdfsURL() {
-		return hdfsURL;
-	}
-
-	public void setHdfsURL(String hdfsURL) {
-		this.hdfsURL = hdfsURL;
-	}
-
-	public String getSqlURL() {
-		return sqlURL;
-	}
-
-	public void setSqlURL(String sqlURL) {
-		this.sqlURL = sqlURL;
-	}
-
+	
 	public SparkSession spark = SparkSession
 			.builder()
 			.master("local[*]")
@@ -39,16 +32,15 @@ public class ImportConf {
 		return dataset;
 	}
 
-	public void importTable(String table) {
-			Dataset<Row> dataset = loadTableJDBC(table);
-			dataset.repartition(4).write().parquet(hdfsURL+table);
+	public void importTable(String table) throws AnalysisException {
+		Dataset<Row> dataset = loadTableJDBC(table);
+		dataset.repartition(4).write().mode(SaveMode.Overwrite).parquet(hdfsURL+table);
 	}
 
 
-	public void importTable(String talbe,String col, String... cols ) throws AnalysisException{
-		Dataset<Row> dataset = loadTableJDBC(talbe).select(col,cols);
-		dataset.repartition(4).write().parquet(hdfsURL+talbe);
-		
+	public void importTable(String table,String col, String... cols ) throws AnalysisException {
+		Dataset<Row> dataset = loadTableJDBC(table).select(col,cols);
+		dataset.repartition(4).write().mode(SaveMode.Overwrite).parquet(hdfsURL+table);
 	}
 
 }

@@ -6,12 +6,12 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 
-import com.hduser.parquet.timesheet.Conf;
-import com.hduser.parquet.timesheet.Dependent;
-import com.hduser.parquet.timesheet.IncomeConfigs;
-import com.hduser.parquet.timesheet.OverTimes;
-import com.hduser.parquet.timesheet.Periods;
-import com.hduser.parquet.timesheet.Timesheets;
+import com.hduser.parquet.dataset.Conf;
+import com.hduser.parquet.dataset.Dependent;
+import com.hduser.parquet.dataset.IncomeConfigs;
+import com.hduser.parquet.dataset.OverTimes;
+import com.hduser.parquet.dataset.Periods;
+import com.hduser.parquet.dataset.Timesheets;
 
 public class Salary {
 
@@ -22,28 +22,10 @@ public class Salary {
 	}
 
 	public double getWorkingDate(int period) {
+		
 		Dataset<Row> WorkingDate = new  Periods().getTA_Working_Date();
 
 		return WorkingDate.filter(col("PERIOD_ID").equalTo(period)).select("WORKING_DATE").first().getDouble(0);
-	}
-
-	public Dataset<Row> getBasicSalary(int period) {
-
-		double workingDate = getWorkingDate(period);
-
-		Dataset<Row> timesheet = new Timesheets().getTimesheet(period);
-
-		Dataset<Row> income = new IncomeConfigs().getIncome(period, basicSalaryId);
-
-		Dataset<Row> basicSalary = 
-				timesheet
-				.join(income, "EMPLOYEE_ID")
-				.withColumn("SALARY", timesheet.col("BASIC_CO").multiply(income.col("CUSTOM_VALUE")).divide(workingDate))
-				;
-		basicSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "basicSalary");
-
-		return basicSalary;
 	}
 
 	public void getSalary(int period) {
@@ -84,7 +66,7 @@ public class Salary {
 				;
 		
 		timesheetNoTaxSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.hdfsURL + "timesheetNoTaxSalary");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "timesheetNoTaxSalary");
 		
 		Dataset<Row> overtimeNoTaxSalary =
 				overtime
@@ -93,7 +75,7 @@ public class Salary {
 				;
 
 		overtimeNoTaxSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.hdfsURL + "overtimeNoTaxSalary");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "overtimeNoTaxSalary");
 		Dataset<Row> dependentperiod = new Dependent().getDependent(period);
 		
 		Conf.loadTable("EMPLOYEES");
@@ -106,8 +88,7 @@ public class Salary {
 //	
 				
 		
-		Dataset<Row> giamtru = 
-				
+		Dataset<Row> giamtru = 	
 				employee
 				.join(timesheetNoTaxSalary.groupBy("EMPLOYEE_ID").sum("TIMESHEET_SALARY_NOTAX"),
 						employee.col("EMPLOYEE_ID").equalTo(timesheetNoTaxSalary.col("EMPLOYEE_ID")),"fullouter")
@@ -124,10 +105,6 @@ public class Salary {
 		
 		giamtru.orderBy("EMPLOYEE_ID").repartition(4)
 		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "giamtru");
-		
-		
-		
-		
 		
 		/////Salary before tax
 		Dataset<Row> salaryBeforeTax =
@@ -159,12 +136,9 @@ public class Salary {
 		
 		Dataset<Row> salaryTotalTaxStat= Conf.spark.sql(Sql);
 		salaryTotalTaxStat.orderBy("EMPLOYEE_ID").repartition(1)
-		.write().mode(SaveMode.Overwrite).json(Conf.hdfsURL + "netSalary/PERIOD_ID="+period);
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "netSalary/PERIOD_ID="+period);
 		
 	}
-	
-
-
 	public static void main(String[] args) {
 		long start,stop;
 		long fist = System.currentTimeMillis();
@@ -192,12 +166,12 @@ public class Salary {
 		new Salary().getSalary(91);
 		stop = System.currentTimeMillis();
 		long time5 = stop -start;
-		
+//		
 		long last = System.currentTimeMillis();
 		long time = last - fist;
 		System.out.println(time1+"\n"+time2+"\n"+time3+"\n"+time4+"\n"+time5+"\n"+time);
 		
-//		System.out.println(time1);
+//		System.out.println(time1 +"\n"+time2);
 	}
 
 
