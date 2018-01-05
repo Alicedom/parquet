@@ -34,7 +34,7 @@ public class Periods {
 			"	END_DATE,\n" + 
 			"	stage_1 + stage_2 - stage_3 as WORKING_DATE\n" + 
 			"\n" + 
-			"from\n" + 
+			" from\n" + 
 			"(	select\n" + 
 			"		*,\n" + 
 			"		case when datediff(mo1,START_DATE) -2 > 0 then datediff(mo1,START_DATE) -2 else 0 end as stage_1, \n" + 

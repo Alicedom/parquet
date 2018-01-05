@@ -12,12 +12,15 @@ public class Dependent {
 		Conf.loadTable("PERIODS");
 	}
 
+	/*
+	 * SQl tinh do nguoi phu thuoc va tong tien giam tru phu thuoc
+	 */
 	public String sql_dependent(int period) {
 		return 
 				"select \n" + 
 				"	EMPLOYEE_ID,\n" + 
 				"	count(t.EMPLOYEE_DEPENDANT_ID) as DEPENDENT_NUMBER,\n" + 
-				"	count(t.EMPLOYEE_DEPENDANT_ID) * 3.6 * 1000000 as DEPENDENT_SALARY,\n" + 
+				"	count(t.EMPLOYEE_DEPENDANT_ID) * 3.6 * 1000000 +9*1000000 as DEPENDENT_SALARY,\n" + 
 				"	PERIOD_ID\n" + 
 				" from\n" + 
 				"	(\n" + 
@@ -33,7 +36,7 @@ public class Dependent {
 				"		) t\n" + 
 				" join EMPLOYEE_RELATIVES v\n" + 
 				" on t.EMPLOYEE_RELATIVE_ID = v.EMPLOYEE_RELATIVE_ID\n" + 
-				"group by EMPLOYEE_ID, PERIOD_ID";
+				" group by EMPLOYEE_ID, PERIOD_ID";
 	}
 	
 	public Dataset<Row> getDependent(int period){

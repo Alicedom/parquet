@@ -17,7 +17,7 @@ public class Conf {
 
 	public static SparkSession spark = SparkSession
 			.builder()
-			.master("local[*]")
+//			.master("local[*]")
 			.appName("Java Spark SQL basic example")
 			.getOrCreate();
 

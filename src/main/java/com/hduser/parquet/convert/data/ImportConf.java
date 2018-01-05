@@ -11,7 +11,7 @@ public class ImportConf {
 	 * link to hdfs
 	 * hdfs://<master ip>:<master port>/path/to/database
 	 */
-	public String hdfsURL="hdfs://master:54310/user/hduser/parquet2/";
+	public String hdfsURL="/home/hduser/Doccuments/script/data/parquet2/";
 
 	/*
 	 * Connection String to connect sql server 
@@ -22,6 +22,8 @@ public class ImportConf {
 			.builder()
 			.master("local[*]")
 			.appName("Java Spark SQL Parquet")
+//			.config("spark.eventLog.enabled",true)
+//			.config("spark.eventLog.dir","/usr/local/hadoop_store/tmp")
 			.getOrCreate();
 
 	public Dataset<Row> loadTableJDBC(String table) {

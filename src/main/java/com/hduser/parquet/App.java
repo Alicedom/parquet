@@ -10,6 +10,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        new Salary().getSalary(89);
+    	for (String string : args) {
+    		new Salary().getSalary(Integer.valueOf(string));
+		}
+    	
+        
     }
 }

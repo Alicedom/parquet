@@ -26,24 +26,21 @@ public class Taxes {
 				"		when TOTAL_SALARY < 52*1000000 then 0.25 * TOTAL_SALARY - 3.25*1000000\n" + 
 				"		when TOTAL_SALARY < 80*1000000 then 0.30 * TOTAL_SALARY - 5.85*1000000\n" + 
 				"		else				   				0.35 * TOTAL_SALARY - 9.85*1000000\n" + 
-				"	end as TAX_STAT\n" + 
+				"	end as TAX_STAT\n" +
 				" from\n" + 
 				"		TOTAL";
-		
-		
 
 		Dataset<Row> salaryTotalTaxStat= Conf.spark.sql(Sql);
-//		Dataset<Row> salaryTotalTaxStat= totalSalary.withColumn("TAX_STAT", col("TOTAL_SALARY").);
-		
 		salaryTotalTaxStat.orderBy("EMPLOYEE_ID").repartition(4)
 		.write().mode(SaveMode.Overwrite).parquet(Conf.hdfsURL + "salaryTotalTaxStat");
 		return salaryTotalTaxStat;
 	}
 	
+	public Dataset<Row> getTaxes(int period){
+		return null;
+	}
+	
 	public static void main(String[] args) {
-
-		//		Dataset<Row> getTotalSalary = new Salary().getTotalSalary(89);
-		//		getTotalSalary.orderBy("EMPLOYEE_ID").repartition(1).write().mode(SaveMode.Overwrite).json(Conf.outURL+"getTotalSalary");
 		Dataset<Row> getSalaryTotalTaxStat= new Taxes().getSalaryTotalTaxStat(89);
 		getSalaryTotalTaxStat.orderBy("EMPLOYEE_ID").repartition(1).write().mode(SaveMode.Overwrite).json(Conf.outURL+"getSalaryTotalTaxStat");	
 	}

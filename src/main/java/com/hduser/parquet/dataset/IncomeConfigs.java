@@ -23,7 +23,7 @@ public class IncomeConfigs {
 	public String sql_get_income(int period) {
 		return
 				"select * \n" + 
-				"from\n" + 
+				" from\n" + 
 				"	(select\n" + 
 				"			INCOME_CONFIG_ID,\n" + 
 				"			INCOME_ID,\n" + 

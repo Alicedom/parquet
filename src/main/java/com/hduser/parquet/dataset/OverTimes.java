@@ -12,7 +12,10 @@ public class OverTimes {
 		Conf.loadTable("TA_EMPLOYEE_OVERTIMES");
 		Conf.loadTable("TA_OVERTIME_SETTING");
 	}
-	
+	/*
+	 * SQl tinh tong he so tang ca trong thang
+	 * tinh theo hour
+	 */
 	public String sql_overtime(int period) {
 		return 
 				"select\n" + 
@@ -20,8 +23,8 @@ public class OverTimes {
 				"		PERIOD_ID,\n" + 
 				"		OVERTIME_NAME,\n" + 
 				"		sum(APPROVED_HOURS) as SUM_HOURS,\n" + 
-				"		sum(APPROVED_HOURS) * cast(SUBSTRING(OVERTIME_NAME,4,3) as int) / 100 as CO_OVERTIME,\n" +
-				"		sum(APPROVED_HOURS) * (cast(SUBSTRING(OVERTIME_NAME,4,3) as int) - 100) / 100 as CO_OVERTIME_NO_TAX\n" +
+				"		sum(APPROVED_HOURS) * cast(SUBSTRING(OVERTIME_NAME,4,3) as int) / 100 /8 as CO_OVERTIME,\n" +
+				"		sum(APPROVED_HOURS) * (cast(SUBSTRING(OVERTIME_NAME,4,3) as int) - 100) / 100 /8 as CO_OVERTIME_NO_TAX\n" +
 				" from	\n" + 
 				"	(select\n" + 
 				"		EMPLOYEE_ID,\n" + 

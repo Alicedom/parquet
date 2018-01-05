@@ -10,6 +10,9 @@ public class Trip {
 		Conf.loadTable("PERIODS");
 	}
 	
+	/*
+	 * SQl tinh tong tro cap cong tac
+	 */
 	public String sql_trip(int period) {
 		return
 			"\n" + 

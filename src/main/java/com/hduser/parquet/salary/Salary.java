@@ -32,21 +32,22 @@ public class Salary {
 
 	double workingDate = getWorkingDate(period);
 
-		Dataset<Row> income = new IncomeConfigs().getIncome(period, basicSalaryId);
+		Dataset<Row> basic_income = new IncomeConfigs().getIncome(period, basicSalaryId);
+		
 
 		////////////Salary
 		Dataset<Row> timesheet = new Timesheets().getTimesheet(period);
 		Dataset<Row> timesheetSalary = 
 				timesheet
-				.join(income, "EMPLOYEE_ID")
-				.withColumn("TIMESHEET_SALARY", timesheet.col("CO_TIMESHEET").multiply(income.col("CUSTOM_VALUE")).divide(workingDate))
+				.join(basic_income, "EMPLOYEE_ID")
+				.withColumn("TIMESHEET_SALARY", timesheet.col("CO_TIMESHEET").multiply(basic_income.col("CUSTOM_VALUE")).divide(workingDate))
 				;
 
 		Dataset<Row> overtime = new OverTimes().getOvertime(period);
 		Dataset<Row> overtimeSalary = 
 				overtime
-				.join(income, "EMPLOYEE_ID")
-				.withColumn("OVERTIME_SALARY", overtime.col("CO_OVERTIME").multiply(income.col("CUSTOM_VALUE")).divide(workingDate*8))
+				.join(basic_income, "EMPLOYEE_ID")
+				.withColumn("OVERTIME_SALARY", overtime.col("CO_OVERTIME").multiply(basic_income.col("CUSTOM_VALUE")).divide(workingDate*8))
 				;
 
 		Dataset<Row> totalSalary 
@@ -55,27 +56,27 @@ public class Salary {
 			.withColumn("TOTAL_SALARY", col("sum(TIMESHEET_SALARY)").plus(col("sum(OVERTIME_SALARY)")));
 		
 		totalSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "totalSalary");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "totalSalary/PERIOD_ID="+period);
 
 		////////////Dependent
 		Dataset<Row> timesheetNoTax = timesheet.filter(col("IS_NIGHT_SHIFT").equalTo(1));
 		Dataset<Row> timesheetNoTaxSalary =
 				timesheetNoTax
-				.join(income, "EMPLOYEE_ID")
-				.withColumn("TIMESHEET_SALARY_NOTAX", timesheet.col("CO_TIMESHEET").multiply(income.col("CUSTOM_VALUE")).divide(workingDate))
+				.join(basic_income, "EMPLOYEE_ID")
+				.withColumn("TIMESHEET_SALARY_NOTAX", timesheet.col("CO_TIMESHEET").multiply(basic_income.col("CUSTOM_VALUE")).divide(workingDate))
 				;
 		
 		timesheetNoTaxSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "timesheetNoTaxSalary");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "timesheetNoTaxSalary/PERIOD_ID="+period);
 		
 		Dataset<Row> overtimeNoTaxSalary =
 				overtime
-				.join(income, "EMPLOYEE_ID")
-				.withColumn("OVERTIME_SALARY_NOTAX", overtime.col("CO_OVERTIME_NO_TAX").multiply(income.col("CUSTOM_VALUE")).divide(workingDate*8))
+				.join(basic_income, "EMPLOYEE_ID")
+				.withColumn("OVERTIME_SALARY_NOTAX", overtime.col("CO_OVERTIME_NO_TAX").multiply(basic_income.col("CUSTOM_VALUE")).divide(workingDate*8))
 				;
 
 		overtimeNoTaxSalary.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "overtimeNoTaxSalary");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "overtimeNoTaxSalary/PERIOD_ID="+period);
 		Dataset<Row> dependentperiod = new Dependent().getDependent(period);
 		
 		Conf.loadTable("EMPLOYEES");
@@ -99,12 +100,12 @@ public class Salary {
 				.join(dependentperiod,
 						employee.col("EMPLOYEE_ID").equalTo(dependentperiod.col("EMPLOYEE_ID")), "fullouter")
 				.drop(dependentperiod.col("EMPLOYEE_ID"))
-				.withColumn("TOTAL_DEPENDENT", col("sum(TIMESHEET_SALARY_NOTAX)").plus(col("sum(OVERTIME_SALARY_NOTAX)").plus(col("DEPENDENT_SALARY")).plus(9*1000000)))
+				.withColumn("TOTAL_DEPENDENT", col("sum(TIMESHEET_SALARY_NOTAX)").plus(col("sum(OVERTIME_SALARY_NOTAX)").plus(col("DEPENDENT_SALARY"))))
 				;
 					
 		
 		giamtru.orderBy("EMPLOYEE_ID").repartition(4)
-		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "giamtru");
+		.write().mode(SaveMode.Overwrite).json(Conf.outURL + "giamtru/PERIOD_ID="+period);
 		
 		/////Salary before tax
 		Dataset<Row> salaryBeforeTax =
@@ -142,6 +143,7 @@ public class Salary {
 	public static void main(String[] args) {
 		long start,stop;
 		long fist = System.currentTimeMillis();
+		
 		start = System.currentTimeMillis();
 		new Salary().getSalary(90);
 		stop = System.currentTimeMillis();
@@ -166,15 +168,11 @@ public class Salary {
 		new Salary().getSalary(91);
 		stop = System.currentTimeMillis();
 		long time5 = stop -start;
-//		
+		
 		long last = System.currentTimeMillis();
 		long time = last - fist;
 		System.out.println(time1+"\n"+time2+"\n"+time3+"\n"+time4+"\n"+time5+"\n"+time);
 		
-//		System.out.println(time1 +"\n"+time2);
 	}
-
-
-
 
 }

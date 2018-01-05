@@ -12,6 +12,10 @@ public class Timesheets {
 		Conf.loadTable("TA_WORKING_TYPES");
 	}
 
+	/*
+	 * SQL tinh tong he so ngay cong thang
+	 * tinh theo day
+	 */
 	public String sql_timesheet(int period){
 		String sql_timesheet=
 				"select\n" + 
